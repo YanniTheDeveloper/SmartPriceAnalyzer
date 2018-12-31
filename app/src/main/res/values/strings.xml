@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Price Easy</string>
+    <string name="zero_p">0.0</string>
+    <string name="zero">0</string>
+    <string name="buy_r">Buy rmb:</string>
+    <string name="profit_r">Profit rmb:</string>
+    <string name="agent_rmb">Agent rmb:</string>
+    <string name="other_rmb">Other rmb:</string>
+    <string name="shipping_rmb">Shipping rmb:</string>
+    <string name="shipping_yc">Shipping yc:</string>
+    <string name="other_yc">Other yc:</string>
+    <string name="rate">Rate(rmb->yc):</string>
+    <string name="analyze">Analyze selling price</string>
+    <string name="selling_price">You should sell it: 0.0</string>
+    <string name="list">List item price</string>
+    <string name="popup_request">Enter the name of the item.</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save price</string>
+
+
+</resources>
