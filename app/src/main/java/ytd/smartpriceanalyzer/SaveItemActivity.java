@@ -1,5 +1,6 @@
 package ytd.smartpriceanalyzer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,7 @@ public class SaveItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveItem();
+                SaveItemActivity.super.finish();
             }
         });
 

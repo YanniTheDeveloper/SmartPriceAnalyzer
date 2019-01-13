@@ -59,6 +59,7 @@ public class AddItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
                 startActivity(saveImageIntent);
+                AddItemActivity.super.finish();
             }
         });
         baseLayout.setOnClickListener(new View.OnClickListener() {
