@@ -57,6 +57,7 @@ public class AddItemActivity extends AppCompatActivity {
         saveImageIntentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: 1/13/2019 saving item price value
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
                 startActivity(saveImageIntent);
                 AddItemActivity.super.finish();

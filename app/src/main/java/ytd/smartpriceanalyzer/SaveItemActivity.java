@@ -49,9 +49,9 @@ public class SaveItemActivity extends AppCompatActivity {
         }catch(Exception e){}
     }
     void saveItem(){
-
+        // TODO: 1/13/2019 setting value to the item and saving it
     }
     void getPhotoFromGallery(){
-
+        // TODO: 1/13/2019 getting the photo from library
     }
 }

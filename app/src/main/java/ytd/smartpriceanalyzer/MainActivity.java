@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         addItemIntentBtn = findViewById(R.id.addItemIntentBtn);
         addItemIntentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,5 +23,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(addItemIntent);
             }
         });
+
+        // TODO: 1/13/2019 card view, with recyler view and list items 
+        
     }
 }
