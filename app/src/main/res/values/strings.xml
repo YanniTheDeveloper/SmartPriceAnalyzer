@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Price Easy</string>
+    <string name="add_item">Add Item</string>
+    <string name="done">Done</string>
     <string name="zero_p">0.0</string>
     <string name="zero">0</string>
     <string name="buy_r">Buy rmb:</string>
@@ -16,6 +18,10 @@
     <string name="popup_request">Enter the name of the item.</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save price</string>
+    <string name="item_name">Item Name</string>
+    <string name="enter_item_name">Enter item name</string>
+    <string name="save_item">Save Item</string>
+    <string name="image_to_upload">image to upload</string>
 
 
 </resources>
