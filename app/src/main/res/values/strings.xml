@@ -7,11 +7,11 @@
     <string name="agent_rmb">Agent rmb:</string>
     <string name="other_rmb">Other rmb:</string>
     <string name="shipping_rmb">Shipping rmb:</string>
-    <string name="shipping_yc">Shipping yc:</string>
-    <string name="other_yc">Other yc:</string>
-    <string name="rate">Rate(rmb->yc):</string>
+    <string name="shipping_yc">Hostess birr:</string>
+    <string name="other_yc">Other birr:</string>
+    <string name="rate">Rate:</string>
     <string name="analyze">Analyze selling price</string>
-    <string name="selling_price">You should sell it: 0.0</string>
+    <string name="selling_price">You should sell it: 0.0 birr</string>
     <string name="list">List item price</string>
     <string name="popup_request">Enter the name of the item.</string>
     <string name="cancel">Cancel</string>

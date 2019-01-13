@@ -16,7 +16,7 @@
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-3506026502812641~3462154596" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -28,8 +28,6 @@
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name=".MyItemList" />
-        <activity android:name=".SaveItem"></activity>
     </application>
 
 </manifest>

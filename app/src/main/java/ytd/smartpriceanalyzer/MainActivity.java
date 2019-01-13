@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     EditText rate;
     View baseLayout;
     AdView advert;
-    ImageView list;
-    ImageView save;
 
     Button analyze ;
     TextView sellPrice ;
@@ -41,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        MobileAds.initialize(this, "ca-app-pub-3506026502812641~3462154596");
         advert = findViewById(R.id.advert);
         AdRequest adRequest = new AdRequest.Builder().build();
         advert.loadAd(adRequest);
@@ -57,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
         analyze =  findViewById(R.id.analyze);
         sellPrice =  findViewById(R.id.sellPrice);
         baseLayout =  findViewById(R.id.baseLayout);
-        list = findViewById(R.id.listbtn);
-        save = findViewById(R.id.savebtn);
-
         analyze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,25 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 sumYC = shippingYCN + otherYCN;
                 price = (sumR * rateN) + sumYC;
 
-                sellPrice.setText("You should sell it: "+price);
+                sellPrice.setText("You should sell it: "+price+" birr");
             }
 
-        });
-
-        list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toList = new Intent (MainActivity.this, MyItemList.class);
-                startActivity(toList);
-            }
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toSave = new Intent (MainActivity.this, SaveItem.class);
-                startActivity(toSave);
-            }
         });
 
         baseLayout.setOnClickListener(new View.OnClickListener() {
