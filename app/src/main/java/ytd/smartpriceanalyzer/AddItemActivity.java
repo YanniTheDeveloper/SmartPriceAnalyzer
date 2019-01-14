@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class AddItemActivity extends AppCompatActivity {
+    static boolean itemSaved = false;
     EditText buyR ;
     EditText profitR ;
     EditText shippingR;
@@ -59,8 +60,9 @@ public class AddItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO: 1/13/2019 saving item price value
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
+                saveImageIntent.putExtra("price", price);
                 startActivity(saveImageIntent);
-                AddItemActivity.super.finish();
+                if(itemSaved)AddItemActivity.super.finish();
             }
         });
         baseLayout.setOnClickListener(new View.OnClickListener() {

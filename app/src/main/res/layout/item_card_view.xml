@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_gravity="start"
+    app:cardUseCompatPadding="true"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/itemPhoto"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_margin="2dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/item_photo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/no_photo_selected" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineDivider"
+            android:layout_margin="2dp"></View>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/itemName"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textSizeB"
+                android:padding="1dp"/>
+            <TextView
+                android:id="@+id/itemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:padding="2dp"
+                android:textColor="@color/textColorSecond"
+                android:textSize="@dimen/textSizeS" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/textSizeB" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

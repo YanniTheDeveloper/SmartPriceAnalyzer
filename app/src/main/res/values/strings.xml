@@ -22,6 +22,9 @@
     <string name="enter_item_name">Enter item name</string>
     <string name="save_item">Save Item</string>
     <string name="image_to_upload">image to upload</string>
+    <string name="item_photo">item photo</string>
+    <string name="description">Description</string>
+    <string name="write_description_here">write description here...</string>
 
 
 </resources>
