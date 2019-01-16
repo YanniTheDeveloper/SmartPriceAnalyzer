@@ -34,13 +34,13 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         itemDescription.setText(currentItem.getDescription());
 
         TextView itemPrice = itemView.findViewById(R.id.itemPrice);
-        String price = ""+currentItem.getPrice();
+        String price = ""+currentItem.getPrice()+" "+"birr";
         itemPrice.setText(price);
 
         ImageView itemPhoto = itemView.findViewById(R.id.itemPhoto);
 
-        if(currentItem.getPhotoUri()==null) itemPhoto.setImageResource(R.drawable.no_photo_selected);
-        else itemPhoto.setImageURI(currentItem.getPhotoUri());
+        if(currentItem.getPhoto()!=null) itemPhoto.setImageBitmap(currentItem.getPhoto());
+        else itemPhoto.setImageResource(R.drawable.no_photo_selected);
 
         return itemView;
     }

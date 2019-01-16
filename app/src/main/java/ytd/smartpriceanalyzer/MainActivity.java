@@ -26,14 +26,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent addItemIntent = new Intent(MainActivity.this, AddItemActivity.class);
                 startActivity(addItemIntent);
-                if(AddItemActivity.itemSaved) {
-                    AddItemActivity.itemSaved = false;
                     refresh();
-                }
             }
         });
 
-        // TODO: 1/13/2019 card view, with recyler view and list items
+        // TODO: 1/16/2019 save items to persistent storage
+        // TODO: 1/16/2019 autoupdate refresh() when item is added
         refresh();
     }
 

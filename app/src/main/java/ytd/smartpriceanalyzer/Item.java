@@ -1,20 +1,22 @@
 package ytd.smartpriceanalyzer;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class Item {
+    private String id;
     private String name;
     private double price;
-    private Uri photoUri;
+    private Bitmap photo;
     private String description;
 
     public Item() {
     }
 
-    public Item(String name, double price, Uri photoUri, String description) {
+    public Item(String name, double price, Bitmap photo, String description) {
         this.name = name;
         this.price = price;
-        this.photoUri = photoUri;
+        this.photo = photo;
         this.description = description;
     }
 
@@ -34,12 +36,12 @@ public class Item {
         this.price = price;
     }
 
-    public Uri getPhotoUri() {
-        return photoUri;
+    public Bitmap getPhoto() {
+        return photo;
     }
 
-    public void setPhotoUri(Uri photoUri) {
-        this.photoUri = photoUri;
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
     }
 
     public String getDescription() {

@@ -6,63 +6,76 @@
     android:layout_height="match_parent"
     tools:context="ytd.smartpriceanalyzer.SaveItemActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textColor="@color/textColor"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/itemNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_item_name"
-            android:inputType="text" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            android:textColor="@color/textColor"/>
+            <TextView
+                android:id="@+id/priceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/zero_p"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/textSizeXXB" />
 
-        <EditText
-            android:id="@+id/itemDescriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/write_description_here"
-            android:inputType="text" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/item_name"
+                android:textColor="@color/textColor" />
 
-        <ImageView
-            android:id="@+id/itemPhotoImageView"
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/image_to_upload"
-            android:scaleType="centerCrop"
-            android:src="@drawable/no_photo_selected"
-            />
+            <EditText
+                android:id="@+id/itemNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_item_name"
+                android:inputType="textCapSentences" />
 
-        <Button
-            android:id="@+id/saveItemBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save_item"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:layout_marginTop="8dp"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="@color/textColor" />
 
+            <EditText
+                android:id="@+id/itemDescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/write_description_here"
+                android:inputType="text" />
+
+            <ImageView
+                android:id="@+id/itemPhotoImageView"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/image_to_upload"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_photo_selected" />
+
+            <Button
+                android:id="@+id/saveItemBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/save_item"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
