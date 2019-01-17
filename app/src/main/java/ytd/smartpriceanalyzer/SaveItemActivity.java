@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ public class SaveItemActivity extends AppCompatActivity {
     EditText itemDescriptionEditText;
     TextView priceView;
     Uri selectedImage;
+    Bitmap selectedImageBitmap;
     Double price = 0.0;
     Item newItem = new Item();
     @Override
@@ -59,7 +61,7 @@ public class SaveItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveItem();
-                if(AddItemActivity.itemSaved)SaveItemActivity.super.finish();
+                if(ItemHandler.isItemSaved())SaveItemActivity.super.finish();
             }
         });
 
@@ -80,16 +82,11 @@ public class SaveItemActivity extends AppCompatActivity {
         newItem.setName(tempName);
         newItem.setPrice(price);
         newItem.setDescription(itemDescriptionEditText.getText().toString());
-        try {
-            newItem.setPhoto(getBitmapFromUri(selectedImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new GetBitmapFromUri().execute(selectedImage, null, null);
         ItemHandler.addItem(newItem);
-        AddItemActivity.itemSaved = true;
+        if(!ItemHandler.isItemSaved())ItemHandler.toggleItemSaved();
     }
     void getPhotoFromGallery(){
-        // TODO: 1/16/2019 put this function on async thread
         Intent choosePhotoIntent =  new Intent(Intent.ACTION_OPEN_DOCUMENT);
         choosePhotoIntent.addCategory(Intent.CATEGORY_OPENABLE);
         choosePhotoIntent.setType("image/*");
@@ -103,19 +100,34 @@ public class SaveItemActivity extends AppCompatActivity {
         if (requestCode == RC_PHOTO_PICKER && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 selectedImage = data.getData();
-                Log.i(null, "Uri: " + selectedImage.toString());
                 itemPhotoImageView.setImageURI(selectedImage);
             }
         }
     }
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        if(uri == null) return null;
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
+
+
+    private class GetBitmapFromUri extends AsyncTask<Uri, Void, Void>{
+        @Override
+        protected Void doInBackground(Uri... uris) {
+            try {
+                newItem.setPhoto(getBitmapFromUri(uris[0]));
+            } catch (IOException e) {
+                e.printStackTrace();
+                newItem.setPhoto(null);
+            }return null;
+
+        }
+
+        private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+            // TODO: 1/16/2019 put this function on async thread
+            if(uri == null) return null;
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            parcelFileDescriptor.close();
+            return image;
+        }
     }
 
 }

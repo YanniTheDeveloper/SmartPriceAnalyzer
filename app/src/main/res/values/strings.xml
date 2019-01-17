@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Price Easy</string>
     <string name="add_item">Add Item</string>
-    <string name="done">Done</string>
+    <string name="done">ok</string>
     <string name="zero_p">0.0</string>
     <string name="zero">0</string>
     <string name="buy_r">Buy rmb:</string>

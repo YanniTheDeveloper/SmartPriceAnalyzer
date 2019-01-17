@@ -3,6 +3,7 @@ package ytd.smartpriceanalyzer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class AddItemActivity extends AppCompatActivity {
-    static boolean itemSaved = false;
+
     EditText buyR ;
     EditText profitR ;
     EditText shippingR;
@@ -61,10 +62,6 @@ public class AddItemActivity extends AppCompatActivity {
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
                 saveImageIntent.putExtra("price", price);
                 startActivity(saveImageIntent);
-                if(itemSaved){
-                    AddItemActivity.itemSaved = false;
-                    AddItemActivity.super.finish();
-                }
             }
         });
         baseLayout.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +71,16 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(ItemHandler.isItemSaved()){
+            ItemHandler.toggleItemSaved();
+            AddItemActivity.super.finish();
+        }
     }
 
     double getValue(EditText editText){

@@ -21,11 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:padding="8dp"
+            android:background="@color/colorPrimaryDark"
             >
             <TextView
                 android:id="@+id/textView"
@@ -33,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_item"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:textSize="@dimen/textSizeXB"
                 />
@@ -42,8 +39,8 @@
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:text="@string/done"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/white"
+                android:background="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center"
 
                 />
@@ -57,7 +54,6 @@
         android:textColor="@color/textColor"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal">
