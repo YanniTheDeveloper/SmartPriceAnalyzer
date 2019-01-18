@@ -3,14 +3,15 @@ package ytd.smartpriceanalyzer;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ItemHandler {
     private static final String TAG = "ItemHandler";
-    private static ArrayList<Item> items = new ArrayList<>();
+    private static LinkedList<Item> items = new LinkedList<>();
     private static boolean itemSaved = false;
     public static void addItem(Item newItem){
-        items.add(newItem);
+        items.add(0,newItem);
     }
     public static void toggleItemSaved(){
         itemSaved = !itemSaved;
@@ -24,7 +25,7 @@ public class ItemHandler {
     public static int totalItems(){
         return items.size();
     }
-    public static ArrayList<Item> getList(){
+    public static LinkedList<Item> getList(){
         return items;
     }
     public static void removeItem(Item itemToBeRemoved){

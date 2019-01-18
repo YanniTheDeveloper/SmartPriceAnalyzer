@@ -1,65 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ytd.smartpriceanalyzer.SingleItemView">
+    tools:context="ytd.smartpriceanalyzer.SingleItemView"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/singleItemPhotoImageView"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/image_to_upload"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_photo_selected" />
+
+            <TextView
+                android:id="@+id/singleItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:padding="4dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/textSizeXXB"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/lineDivider"/>
+
+            <TextView
+                android:id="@+id/singleItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="2dp"
+                android:padding="1dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeXXXB"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/singleItemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:padding="2dp"
+                android:textColor="@color/textColorSecond"
+                android:textSize="@dimen/textSizeB" />
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/singleItemPhotoImageView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/image_to_upload"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/no_photo_selected" />
-        <TextView
-            android:id="@+id/singleItemPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_gravity="end"
-            android:textStyle="bold"
-            android:padding="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/textSizeXXB" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lineDivider"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="8dp"></View>
-        <TextView
-            android:id="@+id/singleItemName"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            android:layout_marginBottom="2dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textSize="@dimen/textSizeXXXB"
-            android:padding="1dp"/>
-        <TextView
-            android:id="@+id/singleItemDescription"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:padding="2dp"
-            android:textColor="@color/textColorSecond"
-            android:textSize="@dimen/textSizeB" />
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
 
+        <Button
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/edit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeB" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+           />
+
+        <Button
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeB" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

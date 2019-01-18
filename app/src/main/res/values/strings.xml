@@ -25,6 +25,8 @@
     <string name="item_photo">item photo</string>
     <string name="description">Description</string>
     <string name="write_description_here">write description here...</string>
+    <string name="share">Share</string>
+    <string name="edit">Edit</string>
 
 
 </resources>

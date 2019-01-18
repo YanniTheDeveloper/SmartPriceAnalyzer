@@ -35,6 +35,7 @@ public class SaveItemActivity extends AppCompatActivity {
     Bitmap selectedImageBitmap;
     Double price = 0.0;
     Item newItem = new Item();
+    Boolean imageFinished = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,8 @@ public class SaveItemActivity extends AppCompatActivity {
         newItem.setDescription(itemDescriptionEditText.getText().toString());
         new GetBitmapFromUri().execute(selectedImage, null, null);
         ItemHandler.addItem(newItem);
-        if(!ItemHandler.isItemSaved())ItemHandler.toggleItemSaved();
+        while(!ItemHandler.isItemSaved())
+            if(imageFinished)ItemHandler.toggleItemSaved();
     }
     void getPhotoFromGallery(){
         Intent choosePhotoIntent =  new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -101,6 +103,7 @@ public class SaveItemActivity extends AppCompatActivity {
             if (data != null) {
                 selectedImage = data.getData();
                 itemPhotoImageView.setImageURI(selectedImage);
+                imageFinished = false;
             }
         }
     }
@@ -114,7 +117,9 @@ public class SaveItemActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
                 newItem.setPhoto(null);
-            }return null;
+            }
+            imageFinished = true;
+            return null;
 
         }
 
