@@ -1,6 +1,8 @@
 package ytd.smartpriceanalyzer;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +12,24 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     ItemAdapter itemAdapter;
     Button addItemIntentBtn;
-    private ListView itemListView;
+    private SwipeMenuListView itemListView;
+    SwipeMenuCreator creator;
+    AdView advert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        for(int i = 1; i<10; i++){
+            Item temp = new Item();
+            temp.setName("Item "+i);
+            temp.setPrice(i*10);
+            ItemHandler.addItem(temp);
+        }
+        initAd();
+        swipeMenuCreator();
         // TODO: 1/16/2019 save items to persistent storage, maybe #sqlite
-        // TODO: 1/16/2019 autoupdate refresh() when item is added
         refresh();
     }
 
@@ -60,5 +79,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         refresh();
+    }
+
+    void swipeMenuCreator(){
+        creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+
+                deleteItem.setBackground(null);
+                deleteItem.setWidth(200);
+                deleteItem.setTitle("delete");
+                deleteItem.setTitleSize(20);
+                deleteItem.setTitleColor(Color.RED);
+
+                menu.addMenuItem(deleteItem);
+
+
+            }
+        };
+        itemListView.setMenuCreator(creator);
+        itemListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch(index){
+                    case 0:
+                        ItemHandler.removeItem(position);
+                        refresh();
+                        break;
+                    case 1:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+    void initAd(){
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        advert = findViewById(R.id.advertInHome);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        advert.loadAd(adRequest);
     }
 }
