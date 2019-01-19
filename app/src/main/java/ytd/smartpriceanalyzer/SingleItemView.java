@@ -21,7 +21,7 @@ public class SingleItemView extends AppCompatActivity {
 
         Item clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
         singleItemName.setText(clickedItem.getName());
-        singleItemPrice.setText(clickedItem.getPrice()+" birr");
+        singleItemPrice.setText(clickedItem.getItemPrice().getPrice()+" birr");
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());
         singleItemDescription.setText(clickedItem.getDescription());
     }

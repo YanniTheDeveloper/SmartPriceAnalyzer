@@ -31,8 +31,7 @@ public class AddItemActivity extends AppCompatActivity {
     Button analyze ;
     TextView sellPrice ;
 
-    double buyRN = 0.0, profitRN = 0.0, shippingRN = 0.0, shippingYCN = 0.0, otherRN = 0.0, otherYCN = 0.0, agentRN = 0.0, rateN = 0.0;
-    double sumR = 0.0, sumYC = 0.0 , price = 0.0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +45,8 @@ public class AddItemActivity extends AppCompatActivity {
                 resignKeyboard();
                 //gets value from all edit text in AddItem Activity and sets them to their corresponding varialbles
                 updateValue();
-                sumR = buyRN + profitRN + shippingRN + otherRN + agentRN;
-                sumYC = shippingYCN + otherYCN;
-                price = (sumR * rateN) + sumYC;
-
-                sellPrice.setText("You should sell it: "+price+" birr");
-
+                String sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" birr";
+                sellPrice.setText(sellText);
             }
 
         });
@@ -60,7 +55,6 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
-                saveImageIntent.putExtra("price", price);
                 startActivity(saveImageIntent);
             }
         });
@@ -117,15 +111,34 @@ public class AddItemActivity extends AppCompatActivity {
         sellPrice =  findViewById(R.id.sellPrice);
         baseLayout =  findViewById(R.id.baseLayout);
         saveImageIntentBtn = findViewById(R.id.saveItemIntentBtn);
+        initViewText(ItemHandler.getItem().getItemPrice());
+    }
+    void initViewText(ItemPrice itemPrice){
+        initViewText(buyR,itemPrice.getBuyRN());
+        initViewText(profitR,itemPrice.getProfitRN());
+        initViewText(shippingR,itemPrice.getShippingRN());
+        initViewText(shippingYC,itemPrice.getShippingYCN());
+        initViewText(otherR,itemPrice.getOtherRN());
+        initViewText(otherYC,itemPrice.getOtherYCN());
+        initViewText(agentR,itemPrice.getAgentRN());
+        initViewText(rate,itemPrice.getRateN());
+    }
+    void initViewText(EditText editText, double value){
+        if(value>0){
+            String valueInString = ""+value;
+            editText.setText(valueInString);
+        }
     }
     void updateValue(){
-        buyRN = getValue(buyR);
-        profitRN = getValue(profitR);
-        shippingRN = getValue(shippingR);
-        shippingYCN = getValue(shippingYC);
-        otherRN = getValue(otherR);
-        otherYCN = getValue(otherYC);
-        agentRN = getValue(agentR);
-        rateN = getValue(rate);
+        ItemPrice itemPrice = new ItemPrice();
+        itemPrice.setBuyRN(getValue(buyR));
+        itemPrice.setProfitRN(getValue(profitR));
+        itemPrice.setShippingRN(getValue(shippingR));
+        itemPrice.setShippingYCN(getValue(shippingYC));
+        itemPrice.setOtherRN(getValue(otherR));
+        itemPrice.setOtherYCN(getValue(otherYC));
+        itemPrice.setAgentRN(getValue(agentR));
+        itemPrice.setRateN(getValue(rate));
+        ItemHandler.getItem().setItemPrice(itemPrice);
     }
 }

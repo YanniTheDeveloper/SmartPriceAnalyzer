@@ -33,23 +33,15 @@ public class SaveItemActivity extends AppCompatActivity {
     TextView priceView;
     Uri selectedImage;
     Bitmap selectedImageBitmap;
-    Double price = 0.0;
-    Item newItem = new Item();
+    Item newItem ;
     Boolean imageFinished = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_item);
 
-        price = getIntent().getDoubleExtra("price", 0.0);
-        saveItemBtn = findViewById(R.id.saveItemBtn);
-        itemNameEditText = findViewById(R.id.itemNameEditText);
-        itemDescriptionEditText = findViewById(R.id.itemDescriptionEditText);
-        priceView = findViewById(R.id.priceView);
-        itemPhotoImageView = findViewById(R.id.itemPhotoImageView);
-        selectedImage = null;
+        init();
 
-        priceView.setText(price+" birr");
         itemPhotoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +73,9 @@ public class SaveItemActivity extends AppCompatActivity {
             return;
         }
         newItem.setName(tempName);
-        newItem.setPrice(price);
         newItem.setDescription(itemDescriptionEditText.getText().toString());
         new GetBitmapFromUri().execute(selectedImage, null, null);
-        ItemHandler.addItem(newItem);
+        ItemHandler.addItem();
         while(!ItemHandler.isItemSaved())
             if(imageFinished)ItemHandler.toggleItemSaved();
     }
@@ -129,9 +120,31 @@ public class SaveItemActivity extends AppCompatActivity {
             ParcelFileDescriptor parcelFileDescriptor =
                     getContentResolver().openFileDescriptor(uri, "r");
             FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+
             Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            float aspectRatio = image.getWidth() / (float) image.getHeight();
+            int width = 960;
+            int height = Math.round(width / aspectRatio);
+            image = Bitmap.createScaledBitmap(image, width, height, false);
             parcelFileDescriptor.close();
             return image;
+        }
+    }
+
+    void init(){
+        newItem = ItemHandler.getItem();
+        saveItemBtn = findViewById(R.id.saveItemBtn);
+        itemNameEditText = findViewById(R.id.itemNameEditText);
+        itemDescriptionEditText = findViewById(R.id.itemDescriptionEditText);
+        priceView = findViewById(R.id.priceView);
+        itemPhotoImageView = findViewById(R.id.itemPhotoImageView);
+        selectedImage = null;
+
+        priceView.setText(newItem.getItemPrice().getPrice()+" birr");
+        if(!newItem.getName().isEmpty()){
+            itemNameEditText.setText(newItem.getName());
+            itemDescriptionEditText.setText(newItem.getDescription());
+            if(newItem.getPhoto()!=null)itemPhotoImageView.setImageBitmap(newItem.getPhoto());
         }
     }
 

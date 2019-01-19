@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         addItemIntentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ItemHandler.createItem();
                 Intent addItemIntent = new Intent(MainActivity.this, AddItemActivity.class);
                 startActivity(addItemIntent);
             }
@@ -59,10 +60,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         for(int i = 1; i<10; i++){
-            Item temp = new Item();
-            temp.setName("Item "+i);
-            temp.setPrice(i*10);
-            ItemHandler.addItem(temp);
+            ItemHandler.createItem();
+            ItemHandler.getItem().setName("Item "+i);
+            ItemHandler.getItem().getItemPrice().setBuyRN(i*10);
+            ItemHandler.getItem().getItemPrice().setRateN(20-i);
+            ItemHandler.addItem();
         }
         initAd();
         swipeMenuCreator();
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
+                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
+                editItem.setBackground(null);
+                editItem.setWidth(200);
+                editItem.setTitle("edit");
+                editItem.setTitleSize(20);
+                editItem.setTitleColor(Color.GREEN);
+
+                menu.addMenuItem(editItem);
+
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
 
@@ -105,10 +116,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch(index){
                     case 0:
-                        ItemHandler.removeItem(position);
-                        refresh();
+                        ItemHandler.editItem(position);
+                        Intent editItemIntent = new Intent(MainActivity.this, AddItemActivity.class);
+                        startActivity(editItemIntent);
                         break;
                     case 1:
+                        ItemHandler.removeItem(position);
+                        refresh();
                         break;
                 }
                 return false;

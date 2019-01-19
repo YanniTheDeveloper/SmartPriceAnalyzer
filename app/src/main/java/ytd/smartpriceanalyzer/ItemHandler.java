@@ -4,14 +4,41 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ItemHandler {
+    private static Item item;
+    private static int editItemPosition = -1;
+
+    public static Item getItem() {
+        return item;
+    }
+
+    public static void editItem(int position) {
+        ItemHandler.item = ItemHandler.getItem(position);
+        setEditItemPosition(position);
+    }
+    public static void createItem() {
+        ItemHandler.item = new Item();
+    }
+    public static int getEditItemPosition() {
+        return editItemPosition;
+    }
+
+    public static void setEditItemPosition(int editItemPosition) {
+        ItemHandler.editItemPosition = editItemPosition;
+    }
+
     private static final String TAG = "ItemHandler";
     private static LinkedList<Item> items = new LinkedList<>();
     private static boolean itemSaved = false;
-    public static void addItem(Item newItem){
-        items.add(0,newItem);
+    public static void addItem(){
+        if (getEditItemPosition()>=0){
+            items.remove(getEditItemPosition());
+            items.add(getEditItemPosition(), item);
+            setEditItemPosition(-1);
+        }else {
+            items.add(0, item);
+        }
     }
     public static void toggleItemSaved(){
         itemSaved = !itemSaved;
