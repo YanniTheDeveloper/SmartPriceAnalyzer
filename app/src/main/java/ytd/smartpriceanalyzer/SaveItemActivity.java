@@ -104,7 +104,8 @@ public class SaveItemActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Uri... uris) {
             try {
-                newItem.setPhoto(getBitmapFromUri(uris[0]));
+                Bitmap tempBitmap = getBitmapFromUri(uris[0]);
+                if(tempBitmap != null) newItem.setPhoto(tempBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
                 newItem.setPhoto(null);
