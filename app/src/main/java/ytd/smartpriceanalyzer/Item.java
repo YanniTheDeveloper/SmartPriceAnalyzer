@@ -3,6 +3,16 @@ package ytd.smartpriceanalyzer;
 import android.graphics.Bitmap;
 
 public class Item {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String name;
     private ItemPrice itemPrice;
     private Bitmap photo ;
@@ -13,6 +23,7 @@ public class Item {
         itemPrice = new ItemPrice();
         name = "";
         description = "";
+        id = -1;
     }
 
     public Item(String name, ItemPrice itemPrice, Bitmap photo, String description) {

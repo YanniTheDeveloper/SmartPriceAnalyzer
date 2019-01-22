@@ -35,6 +35,7 @@ public class ItemHandler {
         if (getEditItemPosition()>=0){
             items.remove(getEditItemPosition());
             items.add(getEditItemPosition(), item);
+            MainActivity.dbHelper.updateData(item);
             setEditItemPosition(-1);
         }else {
             items.add(0, item);
@@ -61,7 +62,10 @@ public class ItemHandler {
     }
     public static void removeItem(int position){
         Log.e(TAG, "removeItem "+position);
-        if(position>=0) items.remove(position);
+        if(position>=0) {
+            MainActivity.dbHelper.deleteData(getItem(position).getId());
+            items.remove(position);
+        }
     }
     public static ArrayList<Item> searchItem(String name){
         ArrayList<Item> searchResultItems = new ArrayList<>();

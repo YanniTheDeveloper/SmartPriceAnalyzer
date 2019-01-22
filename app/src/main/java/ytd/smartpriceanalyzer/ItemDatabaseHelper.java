@@ -118,8 +118,9 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext()) {
             long itemId = cursor.getLong(
                     cursor.getColumnIndexOrThrow(ItemDatabaseContract.ItemEntry._ID));
-            if(itemId != 1){
+            if(itemId != -1){
                 Item item = new Item();
+                item.setId(cursor.getInt(0));
                 item.setName(cursor.getString(1));
                 item.setDescription(cursor.getString(2));
                 item.getItemPrice().setBuyRN(cursor.getDouble(3));
@@ -140,6 +141,53 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return items;
+    }
+    public boolean deleteData(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Define 'where' part of query.
+        String selection = ItemDatabaseContract.ItemEntry._ID + " = ?";
+// Specify arguments in placeholder order.
+        String[] selectionArgs = { Integer.toString(id) };
+// Issue SQL statement.
+        int deletedRows = db.delete(ItemDatabaseContract.ItemEntry.TABLE_NAME, selection, selectionArgs);
+        if(deletedRows>0) return true;
+        else return false;
+    }
+    public boolean updateData(Item item){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+// New value for one column
+        String title = "MyNewTitle";
+        ContentValues values = new ContentValues();
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_NAME, item.getName());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_DESCRIPTION, item.getDescription());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_BUYR, item.getItemPrice().getBuyRN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_PROFITR, item.getItemPrice().getProfitRN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_SHIPPINGR, item.getItemPrice().getShippingRN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_SHIPPINGYC, item.getItemPrice().getShippingYCN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERR, item.getItemPrice().getOtherRN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERYC, item.getItemPrice().getOtherYCN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_AGENTR, item.getItemPrice().getAgentRN());
+        values.put(ItemDatabaseContract.ItemEntry.COLUMN_RATE, item.getItemPrice().getRateN());
+        if(item.getPhoto()!=null) {
+            Bitmap yourBitmap = item.getPhoto();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            yourBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            byte[] bArray = bos.toByteArray();
+            values.put(ItemDatabaseContract.ItemEntry.COLUMN_PHOTO, bArray);
+        }
+
+// Which row to update, based on the title
+        String selection = ItemDatabaseContract.ItemEntry._ID + " = ?";
+        String[] selectionArgs = { Integer.toString(item.getId()) };
+
+        int count = db.update(
+                ItemDatabaseContract.ItemEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        if(count>=0) return true;
+        else return false;
     }
 
 }
