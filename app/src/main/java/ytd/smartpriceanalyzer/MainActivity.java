@@ -30,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private SwipeMenuListView itemListView;
     SwipeMenuCreator creator;
     AdView advert;
+    static ItemDatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dbHelper = new ItemDatabaseHelper(this);
+        ItemHandler.items = dbHelper.readData();
         itemListView = findViewById(R.id.itemListView);
         addItemIntentBtn = findViewById(R.id.addItemIntentBtn);
         addItemIntentBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        for(int i = 1; i<10; i++){
+       /* for(int i = 1; i<10; i++){
             ItemHandler.createItem();
             ItemHandler.getItem().setName("Item "+i);
             ItemHandler.getItem().getItemPrice().setBuyRN(i*10);
             ItemHandler.getItem().getItemPrice().setRateN(20-i);
             ItemHandler.addItem();
-        }
+        }*/
         initAd();
         swipeMenuCreator();
         // TODO: 1/16/2019 save items to persistent storage, maybe #sqlite
@@ -83,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         refresh();
     }
 
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
+    }
     void swipeMenuCreator(){
         creator = new SwipeMenuCreator() {
             @Override

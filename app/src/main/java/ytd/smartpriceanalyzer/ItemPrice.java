@@ -2,7 +2,6 @@ package ytd.smartpriceanalyzer;
 
 public class ItemPrice {
     double buyRN = 0.0, profitRN = 0.0, shippingRN = 0.0, shippingYCN = 0.0, otherRN = 0.0, otherYCN = 0.0, agentRN = 0.0, rateN = 0.0;
-    double sumR = 0.0, sumYC = 0.0 ;
 
     public double getSumR() {
         return buyRN + profitRN + shippingRN + otherRN + agentRN;

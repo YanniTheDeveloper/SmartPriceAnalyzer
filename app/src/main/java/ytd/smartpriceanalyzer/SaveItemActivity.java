@@ -75,9 +75,9 @@ public class SaveItemActivity extends AppCompatActivity {
         newItem.setName(tempName);
         newItem.setDescription(itemDescriptionEditText.getText().toString());
         new GetBitmapFromUri().execute(selectedImage, null, null);
-        ItemHandler.addItem();
         while(!ItemHandler.isItemSaved())
             if(imageFinished)ItemHandler.toggleItemSaved();
+        ItemHandler.addItem();
     }
     void getPhotoFromGallery(){
         Intent choosePhotoIntent =  new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -130,6 +130,7 @@ public class SaveItemActivity extends AppCompatActivity {
             parcelFileDescriptor.close();
             return image;
         }
+
     }
 
     void init(){

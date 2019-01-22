@@ -29,7 +29,7 @@ public class ItemHandler {
     }
 
     private static final String TAG = "ItemHandler";
-    private static LinkedList<Item> items = new LinkedList<>();
+    public static LinkedList<Item> items = new LinkedList<>();
     private static boolean itemSaved = false;
     public static void addItem(){
         if (getEditItemPosition()>=0){
@@ -38,6 +38,7 @@ public class ItemHandler {
             setEditItemPosition(-1);
         }else {
             items.add(0, item);
+            MainActivity.dbHelper.insertData(item);
         }
     }
     public static void toggleItemSaved(){
