@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,7 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     ItemAdapter itemAdapter;
-    Button addItemIntentBtn;
+    Button addItemIntentBtn, setting;
     private SwipeMenuListView itemListView;
     SwipeMenuCreator creator;
     AdView advert;
@@ -36,10 +37,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(Currency.getCurrencyTwoId()==null||Currency.getCurrencyOneId()==null){
+            Intent toSetting = new Intent(MainActivity.this, Setting.class);
+            startActivity(toSetting);
+        }
         dbHelper = new ItemDatabaseHelper(this);
         ItemHandler.items = dbHelper.readData();
         itemListView = findViewById(R.id.itemListView);
         addItemIntentBtn = findViewById(R.id.addItemIntentBtn);
+        setting = findViewById(R.id.setting);
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toSetting = new Intent(MainActivity.this, Setting.class);
+                startActivity(toSetting);
+            }
+        });
         addItemIntentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(null);
+                editItem.setBackground(new ColorDrawable());
                 editItem.setWidth(200);
                 editItem.setTitle("edit");
                 editItem.setTitleSize(20);
-                editItem.setTitleColor(Color.GREEN);
+                editItem.setTitleColor(Color.WHITE);
 
                 menu.addMenuItem(editItem);
 
@@ -111,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 deleteItem.setWidth(200);
                 deleteItem.setTitle("delete");
                 deleteItem.setTitleSize(20);
-                deleteItem.setTitleColor(Color.RED);
+                deleteItem.setTitleColor(Color.WHITE);
 
                 menu.addMenuItem(deleteItem);
 

@@ -1,7 +1,7 @@
 package ytd.smartpriceanalyzer;
 
 public class ItemPrice {
-    double buyRN = 0.0, profitRN = 0.0, shippingRN = 0.0, shippingYCN = 0.0, otherRN = 0.0, otherYCN = 0.0, agentRN = 0.0, rateN = 0.0;
+    double buyRN = 0.0, profitRN = 0.0, shippingRN = 0.0, shippingYCN = 0.0, otherRN = 0.0, otherYCN = 0.0, agentRN = 0.0;
 
     public double getSumR() {
         return buyRN + profitRN + shippingRN + otherRN + agentRN;
@@ -12,7 +12,7 @@ public class ItemPrice {
     }
 
     public double getPrice() {
-        return (getSumR() * getRateN()) + getSumYC();
+        return (getSumR() * Currency.getRate()) + getSumYC();
     }
 
 
@@ -28,7 +28,6 @@ public class ItemPrice {
         this.otherRN = otherRN;
         this.otherYCN = otherYCN;
         this.agentRN = agentRN;
-        this.rateN = rateN;
     }
 
     public double getBuyRN() {
@@ -87,11 +86,5 @@ public class ItemPrice {
         this.agentRN = agentRN;
     }
 
-    public double getRateN() {
-        return rateN;
-    }
 
-    public void setRateN(double rateN) {
-        this.rateN = rateN;
-    }
 }

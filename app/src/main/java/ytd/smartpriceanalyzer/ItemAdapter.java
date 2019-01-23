@@ -1,6 +1,7 @@
 package ytd.smartpriceanalyzer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
+
 
     public ItemAdapter(Context context, List<Item> objects){
         super(context, 0, objects);
@@ -35,7 +37,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         itemDescription.setText(currentItem.getDescription());
 
         TextView itemPrice = itemView.findViewById(R.id.itemPrice);
-        String price = ""+currentItem.getItemPrice().getPrice()+" "+"birr";
+
+        String price = currentItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
         itemPrice.setText(price);
 
         ImageView itemPhoto = itemView.findViewById(R.id.itemPhoto);

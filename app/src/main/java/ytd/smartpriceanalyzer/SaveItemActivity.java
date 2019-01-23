@@ -142,7 +142,7 @@ public class SaveItemActivity extends AppCompatActivity {
         itemPhotoImageView = findViewById(R.id.itemPhotoImageView);
         selectedImage = null;
 
-        priceView.setText(newItem.getItemPrice().getPrice()+" birr");
+        priceView.setText(newItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId());
         if(!newItem.getName().isEmpty()){
             itemNameEditText.setText(newItem.getName());
             itemDescriptionEditText.setText(newItem.getDescription());

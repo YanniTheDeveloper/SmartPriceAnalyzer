@@ -7,7 +7,39 @@
     android:layout_height="match_parent"
     tools:context="ytd.smartpriceanalyzer.SingleItemView"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
 
+        <Button
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/edit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeB" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            />
+
+        <Button
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeB" />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -72,39 +104,93 @@
                 android:padding="2dp"
                 android:textColor="@color/textColorSecond"
                 android:textSize="@dimen/textSizeB" />
+
+            <LinearLayout
+                android:id="@+id/moreInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:id="@+id/buyRSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/buy_r"
+                        android:textSize="@dimen/textSizeB"/>
+                    <TextView
+                        android:id="@+id/profitRSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/profit_r"/>
+                    <TextView
+                        android:id="@+id/shippingRSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/shipping_rmb"/>
+                    <TextView
+                        android:id="@+id/shippingYCSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/shipping_yc"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/rateSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/rate"/>
+                    <TextView
+                        android:id="@+id/otherRSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/other_rmb"/>
+                    <TextView
+                        android:id="@+id/otherYCSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/other_yc"/>
+                    <TextView
+                        android:id="@+id/agentRSingle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSizeB"
+                        android:text="@string/agent_rmb"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="more"
+                android:background="@color/bg"
+                android:textSize="@dimen/textSizeB"
+                android:textColor="@color/textColorSecond"
+                />
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="horizontal">
 
-        <Button
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSizeB" />
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-           />
-
-        <Button
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/share"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSizeB" />
-    </LinearLayout>
 </LinearLayout>

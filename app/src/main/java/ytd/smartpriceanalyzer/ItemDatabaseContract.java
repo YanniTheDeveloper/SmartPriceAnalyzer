@@ -20,6 +20,5 @@ public final class ItemDatabaseContract {
         public static final String COLUMN_OTHERR = "otherR";
         public static final String COLUMN_OTHERYC = "otherYC";
         public static final String COLUMN_AGENTR = "agentR";
-        public static final String COLUMN_RATE = "rate";
     }
 }

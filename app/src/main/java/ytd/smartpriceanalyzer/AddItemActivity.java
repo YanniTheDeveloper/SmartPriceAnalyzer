@@ -16,14 +16,9 @@ import com.google.android.gms.ads.MobileAds;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    EditText buyR ;
-    EditText profitR ;
-    EditText shippingR;
-    EditText shippingYC ;
-    EditText otherR ;
-    EditText otherYC ;
-    EditText agentR;
-    EditText rate;
+    EditText buyR,profitR,shippingR,shippingYC,otherR,otherYC,agentR;
+    TextView buyRt,profitRt,shippingRt,shippingYCt,otherRt,otherYCt,agentRt;
+    TextView rate;
     View baseLayout;
     AdView advert;
 
@@ -45,7 +40,7 @@ public class AddItemActivity extends AppCompatActivity {
                 resignKeyboard();
                 //gets value from all edit text in AddItem Activity and sets them to their corresponding varialbles
                 updateValue();
-                String sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" birr";
+                String sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
                 sellPrice.setText(sellText);
             }
 
@@ -106,12 +101,26 @@ public class AddItemActivity extends AppCompatActivity {
         otherR =  findViewById(R.id.otherR);
         otherYC =  findViewById(R.id.otherYC);
         agentR =  findViewById(R.id.agentR);
+        buyRt =  findViewById(R.id.buyRt);
+        profitRt =  findViewById(R.id.profitRt);
+        shippingRt =  findViewById(R.id.shippingRt);
+        shippingYCt =  findViewById(R.id.shippingYCt);
+        otherRt =  findViewById(R.id.otherRt);
+        otherYCt =  findViewById(R.id.otherYCt);
+        agentRt =  findViewById(R.id.agentRt);
         rate =  findViewById(R.id.rate);
         analyze =  findViewById(R.id.analyze);
         sellPrice =  findViewById(R.id.sellPrice);
         baseLayout =  findViewById(R.id.baseLayout);
         saveImageIntentBtn = findViewById(R.id.saveItemIntentBtn);
         initViewText(ItemHandler.getItem().getItemPrice());
+        buyRt.setText(buyRt.getText()+" "+Currency.getCurrencyOneId());
+        profitRt.setText(profitRt.getText()+" "+Currency.getCurrencyOneId());
+        shippingRt.setText(shippingRt.getText()+" "+Currency.getCurrencyOneId());
+        shippingYCt.setText(shippingYCt.getText()+" "+Currency.getCurrencyTwoId());
+        otherRt.setText(otherRt.getText()+" "+Currency.getCurrencyOneId());
+        otherYCt.setText(otherYCt.getText()+" "+Currency.getCurrencyTwoId());
+        agentRt.setText(agentRt.getText()+" "+Currency.getCurrencyOneId());
     }
     void initViewText(ItemPrice itemPrice){
         initViewText(buyR,itemPrice.getBuyRN());
@@ -121,7 +130,7 @@ public class AddItemActivity extends AppCompatActivity {
         initViewText(otherR,itemPrice.getOtherRN());
         initViewText(otherYC,itemPrice.getOtherYCN());
         initViewText(agentR,itemPrice.getAgentRN());
-        initViewText(rate,itemPrice.getRateN());
+        rate.setText(""+Currency.getRate());
     }
     void initViewText(EditText editText, double value){
         if(value>0){
@@ -138,7 +147,6 @@ public class AddItemActivity extends AppCompatActivity {
         itemPrice.setOtherRN(getValue(otherR));
         itemPrice.setOtherYCN(getValue(otherYC));
         itemPrice.setAgentRN(getValue(agentR));
-        itemPrice.setRateN(getValue(rate));
         ItemHandler.getItem().setItemPrice(itemPrice);
     }
 }

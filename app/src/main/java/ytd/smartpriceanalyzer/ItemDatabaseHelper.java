@@ -25,7 +25,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                     ItemDatabaseContract.ItemEntry.COLUMN_BUYR + " REAL," +ItemDatabaseContract.ItemEntry.COLUMN_PROFITR + " REAL," +
                     ItemDatabaseContract.ItemEntry.COLUMN_SHIPPINGR + " REAL," +ItemDatabaseContract.ItemEntry.COLUMN_SHIPPINGYC + " REAL," +
                     ItemDatabaseContract.ItemEntry.COLUMN_OTHERR + " REAL," +ItemDatabaseContract.ItemEntry.COLUMN_OTHERYC + " REAL," +
-                    ItemDatabaseContract.ItemEntry.COLUMN_AGENTR + " REAL," +ItemDatabaseContract.ItemEntry.COLUMN_RATE + " REAL," +
+                    ItemDatabaseContract.ItemEntry.COLUMN_AGENTR + " REAL," +
                     ItemDatabaseContract.ItemEntry.COLUMN_PHOTO + " BLOB)";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -63,7 +63,6 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERR, item.getItemPrice().getOtherRN());
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERYC, item.getItemPrice().getOtherYCN());
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_AGENTR, item.getItemPrice().getAgentRN());
-        values.put(ItemDatabaseContract.ItemEntry.COLUMN_RATE, item.getItemPrice().getRateN());
         if(item.getPhoto()!=null) {
             Bitmap yourBitmap = item.getPhoto();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -93,7 +92,6 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 ItemDatabaseContract.ItemEntry.COLUMN_OTHERR,
                 ItemDatabaseContract.ItemEntry.COLUMN_OTHERYC,
                 ItemDatabaseContract.ItemEntry.COLUMN_AGENTR,
-                ItemDatabaseContract.ItemEntry.COLUMN_RATE,
                 ItemDatabaseContract.ItemEntry.COLUMN_PHOTO
         };
 
@@ -130,10 +128,9 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 item.getItemPrice().setOtherRN(cursor.getDouble(7));
                 item.getItemPrice().setOtherYCN(cursor.getDouble(8));
                 item.getItemPrice().setAgentRN(cursor.getDouble(9));
-                item.getItemPrice().setRateN(cursor.getDouble(10));
-                if(cursor.getBlob(11)!=null){
-                item.setPhoto(BitmapFactory.decodeByteArray( cursor.getBlob(11),
-                        0,(cursor.getBlob(11)).length));
+                if(cursor.getBlob(10)!=null){
+                item.setPhoto(BitmapFactory.decodeByteArray( cursor.getBlob(10),
+                        0,(cursor.getBlob(10)).length));
                 }
                 items.add(item);
 
@@ -168,7 +165,6 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERR, item.getItemPrice().getOtherRN());
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_OTHERYC, item.getItemPrice().getOtherYCN());
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_AGENTR, item.getItemPrice().getAgentRN());
-        values.put(ItemDatabaseContract.ItemEntry.COLUMN_RATE, item.getItemPrice().getRateN());
         if(item.getPhoto()!=null) {
             Bitmap yourBitmap = item.getPhoto();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
