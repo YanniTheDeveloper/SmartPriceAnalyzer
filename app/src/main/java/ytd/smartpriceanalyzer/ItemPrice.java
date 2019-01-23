@@ -12,9 +12,9 @@ public class ItemPrice {
     }
 
     public double getPrice() {
-        return (getSumR() * Currency.getRate()) + getSumYC();
-    }
 
+        return (double) Math.round(((getSumR() * Currency.getRate()) + getSumYC())*100)/100;
+    }
 
     public ItemPrice() {
     }

@@ -63,6 +63,12 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ItemHandler.setEditItemPosition(-1);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 

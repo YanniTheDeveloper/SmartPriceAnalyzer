@@ -14,7 +14,7 @@ public class ItemHandler {
     }
 
     public static void editItem(int position) {
-        ItemHandler.item = ItemHandler.getItem(position);
+        ItemHandler.item = new Item(ItemHandler.getItem(position).getName(),ItemHandler.getItem(position).getItemPrice(),ItemHandler.getItem(position).getPhoto(),ItemHandler.getItem(position).getDescription());
         setEditItemPosition(position);
     }
     public static void createItem() {

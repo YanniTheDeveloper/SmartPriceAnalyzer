@@ -1,5 +1,7 @@
 package ytd.smartpriceanalyzer;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +47,13 @@ public class Setting extends AppCompatActivity {
                 if(rateSetting.getText().toString().isEmpty()) Toast.makeText(Setting.this, "Please add the rate!", Toast.LENGTH_LONG).show();
                 else {
                     Currency.setRate(Double.parseDouble(rateSetting.getText().toString()));
+                    SharedPreferences sharedPref = Setting.this.getSharedPreferences(
+                            "currency", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("currencyOne", Currency.getCurrencyOneId());
+                    editor.putString("currencyTwo", Currency.getCurrencyTwoId());
+                    editor.putString("rate", ""+Currency.getRate());
+                    editor.apply();
                     onBackPressed();
                 }
             }
@@ -64,9 +73,20 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    if(Currency.getCurrencyTwoId()!=null){
+                    if(Currency.getCurrencyOneId()==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
+                    }
+                    else if(Currency.getCurrencyTwoId()!=null){
+                        rateSettingT.setVisibility(View.VISIBLE);
+                        rateSetting.setVisibility(View.VISIBLE);
+                        for(int i = 0; i<parent.getCount();i++){
+                            if(Currency.getCurrencyOneId().equals(parent.getItemAtPosition(i).toString())){
+                                spinner.performItemClick(view, i, id);
+                            }
+                        }
+                        rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
+                        rateSetting.setText(""+Currency.getRate());
                     }
                     return;
                 }
@@ -76,7 +96,7 @@ public class Setting extends AppCompatActivity {
                 if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
                     rateSetting.setVisibility(View.VISIBLE);
-                    rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
+                    rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
                 }
             }
 
@@ -89,9 +109,20 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    if(Currency.getCurrencyTwoId()!=null){
+                    if(Currency.getCurrencyTwoId()==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
+                    }
+                    else if(Currency.getCurrencyOneId()!=null){
+                        rateSettingT.setVisibility(View.VISIBLE);
+                        rateSetting.setVisibility(View.VISIBLE);
+                        for(int i = 0; i<parent.getCount();i++){
+                            if(Currency.getCurrencyTwoId().equals(parent.getItemAtPosition(i).toString())){
+                               spinner2.performItemClick(view, i, id);
+                            }
+                        }
+                        rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
+                        rateSetting.setText(""+Currency.getRate());
                     }
                     return;
                 }

@@ -1,6 +1,8 @@
 package ytd.smartpriceanalyzer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
@@ -36,11 +38,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                "currency", Context.MODE_PRIVATE);
+        Currency.setCurrencyOneId(sharedPref.getString("currencyOne",null));
+        Currency.setCurrencyTwoId(sharedPref.getString("currencyTwo",null));
+        Currency.setRate(Double.parseDouble(sharedPref.getString("rate","0.0")));
 
         if(Currency.getCurrencyTwoId()==null||Currency.getCurrencyOneId()==null){
             Intent toSetting = new Intent(MainActivity.this, Setting.class);
             startActivity(toSetting);
         }
+
         dbHelper = new ItemDatabaseHelper(this);
         ItemHandler.items = dbHelper.readData();
         itemListView = findViewById(R.id.itemListView);
@@ -110,8 +118,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(new ColorDrawable());
-                editItem.setWidth(200);
+                editItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x96,
+                        0x88)));
+                editItem.setWidth(240);
                 editItem.setTitle("edit");
                 editItem.setTitleSize(20);
                 editItem.setTitleColor(Color.WHITE);
@@ -121,15 +130,14 @@ public class MainActivity extends AppCompatActivity {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
 
-                deleteItem.setBackground(null);
-                deleteItem.setWidth(200);
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF4, 0x43,
+                        0x36)));
+                deleteItem.setWidth(240);
                 deleteItem.setTitle("delete");
                 deleteItem.setTitleSize(20);
                 deleteItem.setTitleColor(Color.WHITE);
 
                 menu.addMenuItem(deleteItem);
-
-
             }
         };
         itemListView.setMenuCreator(creator);
