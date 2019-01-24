@@ -41,6 +41,15 @@
             android:layout_gravity="center"
             android:background="@drawable/add_item" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/noItemMessage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:layout_margin="48dp"
+        android:gravity="center"
+        android:textSize="@dimen/textSizeXXB"
+        android:text="@string/noItemsMessage"/>
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/itemListView"

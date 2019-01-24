@@ -28,7 +28,7 @@
     <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string-array name="currencies_array">
-        <item>...</item>
+        <item>select currency</item>
         <item>AFN Afghan Afghani</item>
         <item>ALL Albanian Lek</item>
         <item>AUD Australian Dollar</item>
@@ -218,6 +218,7 @@ Paanga","id":"TOP"},
         {"currencyName":"Bitcoin","currencySymbol":"BTC","id":"BTC"},
         {"currencyName":"New Belarusian Ruble","currencySymbol":"p.","id":"BYN"}]}</string>
     <string name="delete">delete</string>
+    <string name="noItemsMessage">You don\'t have items to be displayed!   click the + button to add new item</string>
 
 
 </resources>

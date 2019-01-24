@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeMenuListView itemListView;
     SwipeMenuCreator creator;
     AdView advert;
+    TextView noItemMessage;
     static ItemDatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             Intent toSetting = new Intent(MainActivity.this, Setting.class);
             startActivity(toSetting);
         }
-
+        noItemMessage = findViewById(R.id.noItemMessage);
         dbHelper = new ItemDatabaseHelper(this);
         ItemHandler.items = dbHelper.readData();
         itemListView = findViewById(R.id.itemListView);
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
     void refresh(){
         itemAdapter = new ItemAdapter(this,ItemHandler.getList());
         itemListView.setAdapter(itemAdapter);
+        if(ItemHandler.totalItems()!=0) noItemMessage.setVisibility(View.GONE);
+        else noItemMessage.setVisibility(View.VISIBLE);
     }
 
     @Override

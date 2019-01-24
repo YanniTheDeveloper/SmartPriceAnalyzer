@@ -57,6 +57,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineDivider"
+                android:layout_margin="2dp"/>
+
             <TextView
                 android:id="@+id/rateSettingT"
                 android:layout_width="match_parent"

@@ -24,25 +24,8 @@ public class SingleItemView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_view);
 
-        singleItemDescription = findViewById(R.id.singleItemDescription);
-        singleItemPhotoImageView = findViewById(R.id.singleItemPhotoImageView);
-        singleItemName = findViewById(R.id.singleItemName);
-        singleItemPrice =  findViewById(R.id.singleItemPrice);
 
-        delete = findViewById(R.id.deleteBtn);
-        edit = findViewById(R.id.editBtn);
-        more = findViewById(R.id.more);
-        moreInfo = findViewById(R.id.moreInfo);
-
-        buyRsingle = findViewById(R.id.buyRSingle);
-        profitRSingle = findViewById(R.id.profitRSingle);
-        otherRSingle = findViewById(R.id.otherRSingle);
-        otherYCSingle = findViewById(R.id.otherYCSingle);
-        shippingRSingle = findViewById(R.id.shippingRSingle);
-        shippingYCSingle = findViewById(R.id.shippingYCSingle);
-        rateSingle = findViewById(R.id.rateSingle);
-        agentRSingle = findViewById(R.id.agentRSingle);
-        displayItemData();
+        init();
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +59,26 @@ public class SingleItemView extends AppCompatActivity {
 
 
     }
-    void displayItemData(){
+    void init(){
+        singleItemDescription = findViewById(R.id.singleItemDescription);
+        singleItemPhotoImageView = findViewById(R.id.singleItemPhotoImageView);
+        singleItemName = findViewById(R.id.singleItemName);
+        singleItemPrice =  findViewById(R.id.singleItemPrice);
+
+        delete = findViewById(R.id.deleteBtn);
+        edit = findViewById(R.id.editBtn);
+        more = findViewById(R.id.more);
+        moreInfo = findViewById(R.id.moreInfo);
+
+        buyRsingle = findViewById(R.id.buyRSingle);
+        profitRSingle = findViewById(R.id.profitRSingle);
+        otherRSingle = findViewById(R.id.otherRSingle);
+        otherYCSingle = findViewById(R.id.otherYCSingle);
+        shippingRSingle = findViewById(R.id.shippingRSingle);
+        shippingYCSingle = findViewById(R.id.shippingYCSingle);
+        rateSingle = findViewById(R.id.rateSingle);
+        agentRSingle = findViewById(R.id.agentRSingle);
+
         clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
         singleItemName.setText(clickedItem.getName());
 
@@ -86,27 +88,20 @@ public class SingleItemView extends AppCompatActivity {
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());
         singleItemDescription.setText(clickedItem.getDescription());
 
-        temp = concatnate(buyRsingle.getText().toString(), clickedItem.getItemPrice().getBuyRN(), Currency.getCurrencyOneId());
-        buyRsingle.setText(temp);
-        temp = concatnate(profitRSingle.getText().toString(), clickedItem.getItemPrice().getProfitRN(),Currency.getCurrencyOneId());
-        profitRSingle.setText(temp);
-        temp = concatnate(otherYCSingle.getText().toString(), clickedItem.getItemPrice().getOtherYCN(), Currency.getCurrencyTwoId());
-        otherYCSingle.setText(temp);
-        temp = concatnate(otherRSingle.getText().toString(), clickedItem.getItemPrice().getOtherRN(),Currency.getCurrencyOneId());
-        otherRSingle.setText(temp);
-        temp = concatnate(shippingYCSingle.getText().toString(), clickedItem.getItemPrice().getShippingYCN(), Currency.getCurrencyTwoId());
-        shippingYCSingle.setText(temp);
-        temp = concatnate(shippingRSingle.getText().toString(), clickedItem.getItemPrice().getShippingRN(), Currency.getCurrencyOneId());
-        shippingRSingle.setText(temp);
-        temp = rateSingle.getText()+"  " +Currency.getRate();
+        buyRsingle.setText(concatnate(getResources().getString(R.string.buy_r), clickedItem.getItemPrice().getBuyRN(), Currency.getCurrencyOneId()));
+        profitRSingle.setText(concatnate(getResources().getString(R.string.profit_r), clickedItem.getItemPrice().getProfitRN(),Currency.getCurrencyOneId()));
+        otherYCSingle.setText(concatnate(getResources().getString(R.string.other_yc), clickedItem.getItemPrice().getOtherYCN(), Currency.getCurrencyTwoId()));
+        otherRSingle.setText(concatnate(getResources().getString(R.string.other_rmb), clickedItem.getItemPrice().getOtherRN(),Currency.getCurrencyOneId()));
+        shippingYCSingle.setText(concatnate(getResources().getString(R.string.shipping_yc), clickedItem.getItemPrice().getShippingYCN(), Currency.getCurrencyTwoId()));
+        shippingRSingle.setText(concatnate(getResources().getString(R.string.shipping_rmb), clickedItem.getItemPrice().getShippingRN(), Currency.getCurrencyOneId()));
+        temp = getResources().getString(R.string.rate)+"  " +Currency.getRate();
         rateSingle.setText(temp);
-        temp = concatnate(agentRSingle.getText().toString(), clickedItem.getItemPrice().getAgentRN(), Currency.getCurrencyOneId());
-        agentRSingle.setText(temp);
+        agentRSingle.setText(concatnate(getResources().getString(R.string.agent_rmb), clickedItem.getItemPrice().getAgentRN(), Currency.getCurrencyOneId()));
     }
     @Override
     protected void onResume() {
         super.onResume();
-        displayItemData();
+        init();
     }
     String concatnate(String one, Double two, String three){
         one += " :  "+ two + " "+ three;
