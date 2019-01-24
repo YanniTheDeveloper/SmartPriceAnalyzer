@@ -44,11 +44,13 @@ public class Setting extends AppCompatActivity {
         rateSettingT = findViewById(R.id.rateSettingT);
         doneSetting = findViewById(R.id.doneSetting);
         settingDividerLine = findViewById(R.id.settingDividerLine);
-
+        currencyOne = Currency.getCurrencyOneId();
+        currencyTwo = Currency.getCurrencyTwoId();
         doneSetting.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(rateSetting.getText().toString().isEmpty()) Toast.makeText(Setting.this, "Please add the rate!", Toast.LENGTH_LONG).show();
+                else if(Double.parseDouble(rateSetting.getText().toString())<=0.0) Toast.makeText(Setting.this, "invalid rate!", Toast.LENGTH_LONG).show();
                 else {
                     Currency.setCurrencyOneId(currencyOne);
                     Currency.setCurrencyTwoId(currencyTwo);
@@ -79,28 +81,21 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    if(Currency.getCurrencyOneId()==null){
+                    if(currencyOne==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
                         settingDividerLine.setVisibility(View.GONE);
                     }
-                    else if(Currency.getCurrencyTwoId()!=null){
-                        rateSettingT.setVisibility(View.VISIBLE);
-                        rateSetting.setVisibility(View.VISIBLE);
-                        settingDividerLine.setVisibility(View.VISIBLE);
-                        rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
-                        rateSetting.setText(""+Currency.getRate());
-                    }
-                    return;
-                }
+                }else{
                 String currency = parent.getItemAtPosition(position).toString();
                 currencyOne =currency.substring(0,3);
-                Toast.makeText(Setting.this,currency, Toast.LENGTH_LONG).show();
-                if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
+                }
+                if(currencyTwo!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
                     rateSetting.setVisibility(View.VISIBLE);
                     settingDividerLine.setVisibility(View.VISIBLE);
-                    rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
+                    rateSettingT.setText("Rate 1 "+currencyOne+" to "+ currencyTwo);
+                    if(Currency.getRate()>0.0)rateSetting.setText(""+Currency.getRate());
                 }
             }
 
@@ -113,28 +108,21 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    if(Currency.getCurrencyTwoId()==null){
+                    if(currencyTwo==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
                         settingDividerLine.setVisibility(View.GONE);
                     }
-                    else if(Currency.getCurrencyOneId()!=null){
-                        rateSettingT.setVisibility(View.VISIBLE);
-                        rateSetting.setVisibility(View.VISIBLE);
-                        settingDividerLine.setVisibility(View.VISIBLE);
-                        rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
-                        rateSetting.setText(""+Currency.getRate());
-                    }
-                    return;
-                }
+
+                }else{
                 String currency = parent.getItemAtPosition(position).toString();
-                currencyTwo = currency.substring(0,3);
-                Toast.makeText(Setting.this,"Implement it", Toast.LENGTH_LONG).show();
-                if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
+                currencyTwo = currency.substring(0,3);}
+                if(currencyOne!=null) {
                     rateSettingT.setVisibility(View.VISIBLE);
                     rateSetting.setVisibility(View.VISIBLE);
                     settingDividerLine.setVisibility(View.VISIBLE);
-                    rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
+                    rateSettingT.setText("Rate 1 "+currencyOne+" to "+ currencyTwo);
+                    if(Currency.getRate()>0.0)rateSetting.setText(""+Currency.getRate());
                 }
             }
 
@@ -149,12 +137,12 @@ public class Setting extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(Currency.getCurrencyTwoId()!=null&&Currency.getCurrencyOneId()!=null&&Currency.getRate()!=0.0){
+        if(Currency.getCurrencyTwoId()!=null&&Currency.getCurrencyOneId()!=null&&Currency.getRate()>=0.0){
             super.onBackPressed();
 
         }
         else{
-            Toast.makeText(this, "Please choose  currency",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please choose currency and input rate",Toast.LENGTH_LONG).show();
         }
     }
 }
