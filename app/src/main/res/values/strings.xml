@@ -217,6 +217,7 @@ Paanga","id":"TOP"},
 
         {"currencyName":"Bitcoin","currencySymbol":"BTC","id":"BTC"},
         {"currencyName":"New Belarusian Ruble","currencySymbol":"p.","id":"BYN"}]}</string>
+    <string name="delete">delete</string>
 
 
 </resources>

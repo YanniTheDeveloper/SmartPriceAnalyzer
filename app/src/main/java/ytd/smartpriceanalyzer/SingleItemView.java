@@ -1,5 +1,6 @@
 package ytd.smartpriceanalyzer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class SingleItemView extends AppCompatActivity {
              rateSingle, agentRSingle;
     LinearLayout moreInfo;
     Button more;
+    Button delete, edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class SingleItemView extends AppCompatActivity {
         singleItemName = findViewById(R.id.singleItemName);
         singleItemPrice =  findViewById(R.id.singleItemPrice);
 
+        delete = findViewById(R.id.deleteBtn);
+        edit = findViewById(R.id.editBtn);
         more = findViewById(R.id.more);
         moreInfo = findViewById(R.id.moreInfo);
 
@@ -37,7 +41,7 @@ public class SingleItemView extends AppCompatActivity {
         shippingYCSingle = findViewById(R.id.shippingYCSingle);
         rateSingle = findViewById(R.id.rateSingle);
         agentRSingle = findViewById(R.id.agentRSingle);
-
+        final Item clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +55,23 @@ public class SingleItemView extends AppCompatActivity {
             }
         });
 
-        Item clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemHandler.removeItem(getIntent().getIntExtra("itemIndex", 0));
+                onBackPressed();
+            }
+        });
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    ItemHandler.editItem(getIntent().getIntExtra("itemIndex", 0));
+                    Intent editItemIntent = new Intent(SingleItemView.this, AddItemActivity.class);
+                    startActivity(editItemIntent);
+            }
+        });
+
+
         singleItemName.setText(clickedItem.getName());
         singleItemPrice.setText(clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId());
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());

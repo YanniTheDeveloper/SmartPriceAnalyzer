@@ -26,6 +26,8 @@ public class Setting extends AppCompatActivity {
     private Button doneSetting;
     TextView rateSettingT;
     EditText rateSetting;
+    String currencyOne;
+    String currencyTwo;
 
     private List<String> Mlist;
     private Spinner spinner;
@@ -46,6 +48,8 @@ public class Setting extends AppCompatActivity {
             public void onClick(View v) {
                 if(rateSetting.getText().toString().isEmpty()) Toast.makeText(Setting.this, "Please add the rate!", Toast.LENGTH_LONG).show();
                 else {
+                    Currency.setCurrencyOneId(currencyOne);
+                    Currency.setCurrencyTwoId(currencyTwo);
                     Currency.setRate(Double.parseDouble(rateSetting.getText().toString()));
                     SharedPreferences sharedPref = Setting.this.getSharedPreferences(
                             "currency", Context.MODE_PRIVATE);
@@ -91,7 +95,7 @@ public class Setting extends AppCompatActivity {
                     return;
                 }
                 String currency = parent.getItemAtPosition(position).toString();
-                Currency.setCurrencyOneId(currency.substring(0,3));
+                currencyOne =currency.substring(0,3);
                 Toast.makeText(Setting.this,currency, Toast.LENGTH_LONG).show();
                 if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
@@ -127,7 +131,7 @@ public class Setting extends AppCompatActivity {
                     return;
                 }
                 String currency = parent.getItemAtPosition(position).toString();
-                Currency.setCurrencyTwoId(currency.substring(0,3));
+                currencyTwo = currency.substring(0,3);
                 Toast.makeText(Setting.this,"Implement it", Toast.LENGTH_LONG).show();
                 if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
