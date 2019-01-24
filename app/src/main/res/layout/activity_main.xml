@@ -17,13 +17,13 @@
 
         <Button
             android:id="@+id/setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:background="@color/colorPrimaryDark"
+            android:foreground="@drawable/setting"
             android:textColor="@color/white"
-            android:textSize="@dimen/textSizeB"
-            android:text="Setting"/>
+            android:textSize="@dimen/textSizeB" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,12 +32,12 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="@dimen/textSizeXXB" />
+            android:textSize="@dimen/textSizeXXXB" />
 
         <Button
             android:id="@+id/addItemIntentBtn"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:background="@drawable/add_item" />
     </LinearLayout>
