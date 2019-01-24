@@ -18,6 +18,7 @@ public class SingleItemView extends AppCompatActivity {
     LinearLayout moreInfo;
     Button more;
     Button delete, edit;
+    Item clickedItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class SingleItemView extends AppCompatActivity {
         shippingYCSingle = findViewById(R.id.shippingYCSingle);
         rateSingle = findViewById(R.id.rateSingle);
         agentRSingle = findViewById(R.id.agentRSingle);
-        final Item clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
+        clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +72,11 @@ public class SingleItemView extends AppCompatActivity {
             }
         });
 
+        displayItemData();
 
+
+    }
+    void displayItemData(){
         singleItemName.setText(clickedItem.getName());
         singleItemPrice.setText(clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId());
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());
@@ -85,6 +90,10 @@ public class SingleItemView extends AppCompatActivity {
         shippingRSingle.setText(shippingRSingle.getText()+" :  " +clickedItem.getItemPrice().getShippingRN()+" "+Currency.getCurrencyOneId());
         rateSingle.setText(rateSingle.getText()+"  " +Currency.getRate());
         agentRSingle.setText(agentRSingle.getText()+" :  " +clickedItem.getItemPrice().getAgentRN()+" "+Currency.getCurrencyOneId());
-
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayItemData();
     }
 }
