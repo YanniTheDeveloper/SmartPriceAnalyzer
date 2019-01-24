@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
@@ -73,9 +74,9 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
 
 // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ItemDatabaseContract.ItemEntry.TABLE_NAME, null, values);
-        if(newRowId == -1) return false;
-        else return true;
+        return newRowId != -1;
     }
+
     public LinkedList<Item> readData(){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -132,6 +133,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 item.setPhoto(BitmapFactory.decodeByteArray( cursor.getBlob(10),
                         0,(cursor.getBlob(10)).length));
                 }
+                Log.e("ItemDatabaseHandler ", "readData: id "+item.getId());
                 items.add(item);
 
             }
@@ -147,14 +149,12 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { Integer.toString(id) };
 // Issue SQL statement.
         int deletedRows = db.delete(ItemDatabaseContract.ItemEntry.TABLE_NAME, selection, selectionArgs);
-        if(deletedRows>0) return true;
-        else return false;
+        return deletedRows > 0;
     }
     public boolean updateData(Item item){
         SQLiteDatabase db = this.getWritableDatabase();
 
 // New value for one column
-        String title = "MyNewTitle";
         ContentValues values = new ContentValues();
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_NAME, item.getName());
         values.put(ItemDatabaseContract.ItemEntry.COLUMN_DESCRIPTION, item.getDescription());
@@ -182,8 +182,8 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-        if(count>=0) return true;
-        else return false;
+        Log.e("ItemDatabaseHandler ", "id "+item.getId()+" and count "+count);
+        return count >= 0;
     }
 
 }

@@ -42,7 +42,7 @@ public class SingleItemView extends AppCompatActivity {
         shippingYCSingle = findViewById(R.id.shippingYCSingle);
         rateSingle = findViewById(R.id.rateSingle);
         agentRSingle = findViewById(R.id.agentRSingle);
-        clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
+        displayItemData();
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,28 +72,44 @@ public class SingleItemView extends AppCompatActivity {
             }
         });
 
-        displayItemData();
+
 
 
     }
     void displayItemData(){
+        clickedItem = ItemHandler.getItem(getIntent().getIntExtra("itemIndex", 0));
         singleItemName.setText(clickedItem.getName());
-        singleItemPrice.setText(clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId());
+
+        String temp;
+        temp = clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
+        singleItemPrice.setText(temp);
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());
         singleItemDescription.setText(clickedItem.getDescription());
 
-        buyRsingle.setText(buyRsingle.getText()+" :  " +clickedItem.getItemPrice().getBuyRN()+" "+Currency.getCurrencyOneId());
-        profitRSingle.setText(profitRSingle.getText()+" :  " +clickedItem.getItemPrice().getProfitRN()+" "+Currency.getCurrencyOneId());
-        otherYCSingle.setText(otherYCSingle.getText()+" :  " +clickedItem.getItemPrice().getOtherYCN()+" "+Currency.getCurrencyTwoId());
-        otherRSingle.setText(otherRSingle.getText()+" :  " +clickedItem.getItemPrice().getOtherRN()+" "+Currency.getCurrencyOneId());
-        shippingYCSingle.setText(shippingYCSingle.getText()+" :  " +clickedItem.getItemPrice().getShippingYCN()+" "+Currency.getCurrencyTwoId());
-        shippingRSingle.setText(shippingRSingle.getText()+" :  " +clickedItem.getItemPrice().getShippingRN()+" "+Currency.getCurrencyOneId());
-        rateSingle.setText(rateSingle.getText()+"  " +Currency.getRate());
-        agentRSingle.setText(agentRSingle.getText()+" :  " +clickedItem.getItemPrice().getAgentRN()+" "+Currency.getCurrencyOneId());
+        temp = concatnate(buyRsingle.getText().toString(), clickedItem.getItemPrice().getBuyRN(), Currency.getCurrencyOneId());
+        buyRsingle.setText(temp);
+        temp = concatnate(profitRSingle.getText().toString(), clickedItem.getItemPrice().getProfitRN(),Currency.getCurrencyOneId());
+        profitRSingle.setText(temp);
+        temp = concatnate(otherYCSingle.getText().toString(), clickedItem.getItemPrice().getOtherYCN(), Currency.getCurrencyTwoId());
+        otherYCSingle.setText(temp);
+        temp = concatnate(otherRSingle.getText().toString(), clickedItem.getItemPrice().getOtherRN(),Currency.getCurrencyOneId());
+        otherRSingle.setText(temp);
+        temp = concatnate(shippingYCSingle.getText().toString(), clickedItem.getItemPrice().getShippingYCN(), Currency.getCurrencyTwoId());
+        shippingYCSingle.setText(temp);
+        temp = concatnate(shippingRSingle.getText().toString(), clickedItem.getItemPrice().getShippingRN(), Currency.getCurrencyOneId());
+        shippingRSingle.setText(temp);
+        temp = rateSingle.getText()+"  " +Currency.getRate();
+        rateSingle.setText(temp);
+        temp = concatnate(agentRSingle.getText().toString(), clickedItem.getItemPrice().getAgentRN(), Currency.getCurrencyOneId());
+        agentRSingle.setText(temp);
     }
     @Override
     protected void onResume() {
         super.onResume();
         displayItemData();
+    }
+    String concatnate(String one, Double two, String three){
+        one += " :  "+ two + " "+ three;
+        return one;
     }
 }

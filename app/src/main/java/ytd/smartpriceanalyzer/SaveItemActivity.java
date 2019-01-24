@@ -77,7 +77,7 @@ public class SaveItemActivity extends AppCompatActivity {
         new GetBitmapFromUri().execute(selectedImage, null, null);
         while(!ItemHandler.isItemSaved())
             if(imageFinished)ItemHandler.toggleItemSaved();
-        ItemHandler.addItem();
+        ItemHandler.addItem(this);
     }
     void getPhotoFromGallery(){
         Intent choosePhotoIntent =  new Intent(Intent.ACTION_OPEN_DOCUMENT);

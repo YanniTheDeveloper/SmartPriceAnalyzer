@@ -1,6 +1,8 @@
 package ytd.smartpriceanalyzer;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,6 +17,7 @@ public class ItemHandler {
 
     public static void editItem(int position) {
         ItemHandler.item = new Item(ItemHandler.getItem(position).getName(),ItemHandler.getItem(position).getItemPrice(),ItemHandler.getItem(position).getPhoto(),ItemHandler.getItem(position).getDescription());
+        ItemHandler.item.setId(ItemHandler.getItem(position).getId());
         setEditItemPosition(position);
     }
     public static void createItem() {
@@ -31,15 +34,22 @@ public class ItemHandler {
     private static final String TAG = "ItemHandler";
     public static LinkedList<Item> items = new LinkedList<>();
     private static boolean itemSaved = false;
-    public static void addItem(){
+    public static void addItem(Context m){
         if (getEditItemPosition()>=0){
-            items.remove(getEditItemPosition());
-            items.add(getEditItemPosition(), item);
-            MainActivity.dbHelper.updateData(item);
+            if(MainActivity.dbHelper.updateData(item)){
+                items.remove(getEditItemPosition());
+                items.add(getEditItemPosition(), item);
+                Toast.makeText(m,"Item edited", Toast.LENGTH_LONG).show();
+            }
+            else Toast.makeText(m,"Failed to edit item", Toast.LENGTH_LONG).show();
             setEditItemPosition(-1);
         }else {
-            items.add(0, item);
-            MainActivity.dbHelper.insertData(item);
+            item.setId(totalItems());
+            if(MainActivity.dbHelper.insertData(item)){
+                items.add(0, item);
+                Toast.makeText(m,"Item added", Toast.LENGTH_LONG).show();
+            }
+            else Toast.makeText(m,"Failed to add item", Toast.LENGTH_LONG).show();
         }
     }
     public static void toggleItemSaved(){
