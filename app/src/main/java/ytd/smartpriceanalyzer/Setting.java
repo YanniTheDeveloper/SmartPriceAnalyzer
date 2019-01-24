@@ -28,6 +28,7 @@ public class Setting extends AppCompatActivity {
     EditText rateSetting;
     String currencyOne;
     String currencyTwo;
+    View settingDividerLine;
 
     private List<String> Mlist;
     private Spinner spinner;
@@ -42,6 +43,7 @@ public class Setting extends AppCompatActivity {
         rateSetting = findViewById(R.id.rateSetting);
         rateSettingT = findViewById(R.id.rateSettingT);
         doneSetting = findViewById(R.id.doneSetting);
+        settingDividerLine = findViewById(R.id.settingDividerLine);
 
         doneSetting.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,10 +82,12 @@ public class Setting extends AppCompatActivity {
                     if(Currency.getCurrencyOneId()==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
+                        settingDividerLine.setVisibility(View.GONE);
                     }
                     else if(Currency.getCurrencyTwoId()!=null){
                         rateSettingT.setVisibility(View.VISIBLE);
                         rateSetting.setVisibility(View.VISIBLE);
+                        settingDividerLine.setVisibility(View.VISIBLE);
                         rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
                         rateSetting.setText(""+Currency.getRate());
                     }
@@ -95,6 +99,7 @@ public class Setting extends AppCompatActivity {
                 if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
                     rateSetting.setVisibility(View.VISIBLE);
+                    settingDividerLine.setVisibility(View.VISIBLE);
                     rateSettingT.setText("Rate 1 "+Currency.getCurrencyOneId()+" to "+ Currency.getCurrencyTwoId());
                 }
             }
@@ -111,10 +116,12 @@ public class Setting extends AppCompatActivity {
                     if(Currency.getCurrencyTwoId()==null){
                         rateSetting.setVisibility(View.GONE);
                         rateSettingT.setVisibility(View.GONE);
+                        settingDividerLine.setVisibility(View.GONE);
                     }
                     else if(Currency.getCurrencyOneId()!=null){
                         rateSettingT.setVisibility(View.VISIBLE);
                         rateSetting.setVisibility(View.VISIBLE);
+                        settingDividerLine.setVisibility(View.VISIBLE);
                         rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
                         rateSetting.setText(""+Currency.getRate());
                     }
@@ -126,6 +133,7 @@ public class Setting extends AppCompatActivity {
                 if(Currency.getCurrencyTwoId()!=null && Currency.getCurrencyOneId()!=null){
                     rateSettingT.setVisibility(View.VISIBLE);
                     rateSetting.setVisibility(View.VISIBLE);
+                    settingDividerLine.setVisibility(View.VISIBLE);
                     rateSettingT.setText("How much is 1 "+Currency.getCurrencyOneId()+" is in "+ Currency.getCurrencyTwoId()+" ? ");
                 }
             }
