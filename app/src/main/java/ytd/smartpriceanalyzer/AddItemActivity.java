@@ -49,6 +49,11 @@ public class AddItemActivity extends AppCompatActivity {
         saveImageIntentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resignKeyboard();
+                //gets value from all edit text in AddItem Activity and sets them to their corresponding varialbles
+                updateValue();
+                String sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
+                sellPrice.setText(sellText);
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
                 startActivity(saveImageIntent);
             }

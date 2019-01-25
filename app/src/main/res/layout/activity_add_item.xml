@@ -278,7 +278,7 @@
 
     <Button
         android:id="@+id/analyze"
-        android:background="@color/teal"
+        android:background="@color/colorPrimary"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

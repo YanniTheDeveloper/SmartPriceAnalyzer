@@ -24,7 +24,8 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".SaveItemActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +33,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SingleItemView" />
-        <activity android:name=".Setting"></activity>
+        <activity android:name=".Setting"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EntrySplash"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -44,7 +44,11 @@ public class ItemHandler {
             else Toast.makeText(m,"Failed to edit item", Toast.LENGTH_LONG).show();
             setEditItemPosition(-1);
         }else {
-            item.setId(totalItems());
+            try{
+                item.setId(items.getLast().getId()+1);
+            }catch (Exception e) {
+                item.setId(1);
+            }
             if(MainActivity.dbHelper.insertData(item)){
                 items.add(0, item);
                 Toast.makeText(m,"Item added", Toast.LENGTH_LONG).show();

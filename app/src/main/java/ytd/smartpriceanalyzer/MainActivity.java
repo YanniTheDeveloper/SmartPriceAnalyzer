@@ -1,16 +1,20 @@
 package ytd.smartpriceanalyzer;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
     AdView advert;
     TextView noItemMessage;
     static ItemDatabaseHelper dbHelper;
+    static Boolean goToSplashScreen = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         SharedPreferences sharedPref = this.getSharedPreferences(
                 "currency", Context.MODE_PRIVATE);
         Currency.setCurrencyOneId(sharedPref.getString("currencyOne",null));
@@ -51,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(toSetting);
         }
         noItemMessage = findViewById(R.id.noItemMessage);
-        dbHelper = new ItemDatabaseHelper(this);
-        ItemHandler.items = dbHelper.readData();
+
         itemListView = findViewById(R.id.itemListView);
         addItemIntentBtn = findViewById(R.id.addItemIntentBtn);
         setting = findViewById(R.id.setting);
@@ -97,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         swipeMenuCreator();
         // TODO: 1/16/2019 save items to persistent storage, maybe #sqlite
         refresh();
+
     }
 
     void refresh(){
@@ -107,9 +115,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if(goToSplashScreen) {
+            Intent toEntry = new Intent(MainActivity.this, EntrySplash.class);
+            startActivity(toEntry);
+            goToSplashScreen = false;
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         refresh();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        goToSplashScreen = false;
     }
 
     @Override
@@ -122,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x96,
-                        0x88)));
+                editItem.setBackground(new ColorDrawable(Color.rgb(0x22, 0x22,
+                        0x22)));
                 editItem.setWidth(240);
                 editItem.setTitle("edit");
                 editItem.setTitleSize(20);
