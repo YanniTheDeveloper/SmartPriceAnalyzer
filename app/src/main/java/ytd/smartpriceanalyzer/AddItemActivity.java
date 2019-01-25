@@ -38,7 +38,7 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resignKeyboard();
-                //gets value from all edit text in AddItem Activity and sets them to their corresponding varialbles
+                //gets value from all edit text in AddItem Activity and sets them to their corresponding variables
                 updateValue();
                 String sellText;
                 if(ItemHandler.getItem().getItemPrice().getPrice()==0) sellText = "You should sell it: for free";
@@ -52,9 +52,11 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resignKeyboard();
-                //gets value from all edit text in AddItem Activity and sets them to their corresponding varialbles
+                //gets value from all edit text in AddItem Activity and sets them to their corresponding variables
                 updateValue();
-                String sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
+                String sellText;
+                if(ItemHandler.getItem().getItemPrice().getPrice()==0) sellText = "You should sell it: for free";
+                else sellText = "You should sell it: "+ItemHandler.getItem().getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
                 sellPrice.setText(sellText);
                 Intent saveImageIntent = new Intent(AddItemActivity.this, SaveItemActivity.class);
                 startActivity(saveImageIntent);
