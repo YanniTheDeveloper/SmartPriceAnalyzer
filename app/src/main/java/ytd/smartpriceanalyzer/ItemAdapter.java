@@ -38,7 +38,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         TextView itemPrice = itemView.findViewById(R.id.itemPrice);
 
-        String price = currentItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
+        String price;
+        if(currentItem.getItemPrice().getPrice()==0)price = "for free";
+        else price = currentItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
         itemPrice.setText(price);
 
         ImageView itemPhoto = itemView.findViewById(R.id.itemPhoto);

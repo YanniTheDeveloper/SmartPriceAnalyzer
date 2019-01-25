@@ -83,7 +83,8 @@ public class SingleItemView extends AppCompatActivity {
         singleItemName.setText(clickedItem.getName());
 
         String temp;
-        temp = clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
+        if(clickedItem.getItemPrice().getPrice()==0) temp = "for free";
+        else temp = clickedItem.getItemPrice().getPrice()+" "+Currency.getCurrencyTwoId();
         singleItemPrice.setText(temp);
         if(clickedItem.getPhoto()!=null) singleItemPhotoImageView.setImageBitmap(clickedItem.getPhoto());
         singleItemDescription.setText(clickedItem.getDescription());
